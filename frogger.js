@@ -92,22 +92,38 @@ function setInputListeners(){
 
     container.addEventListener("touchend", (e) => {
 
+        if(playerMoving){
+            return
+        }
+        if(KeyPressed === true){
+            return
+        }
+
         var touchendX = e.changedTouches[0].clientX
         var touchendY = e.changedTouches[0].clientY
 
         console.log("touchend",touchendX, touchendY)
         console.log("Y",touchendY, clientY)
         if((touchendX > clientX) && (touchendX - clientX > Math.abs(touchendY - clientY))){
+            KeyPressed = true;
             MovePlayer("right")
         }
         else if((touchendX < clientX) &&  -1*(touchendX - clientX) > Math.abs(touchendY - clientY)){
+            KeyPressed = true;
             MovePlayer("left")
         }
         else if(touchendY < clientY){
+            KeyPressed = true;
             MovePlayer("up")
         }
         else if(touchendY > clientY){
+            KeyPressed = true;
             MovePlayer("down")
+        }
+        if(KeyPressed === true){
+            setTimeout(() => {
+                KeyPressed = false
+            }, 300);
         }
     })
 
@@ -381,18 +397,18 @@ function UpdatePlayer(deltaTime){
 function Draw(){
     DrawMap()
 
-    for (let i = 0; i < 16; i++) {
-        ctx.beginPath();
-        ctx.rect(0, 0, width, colHeight * (i+1));
-        ctx.strokeStyle = "white";
-        ctx.stroke();
+    // for (let i = 0; i < 16; i++) {
+    //     ctx.beginPath();
+    //     ctx.rect(0, 0, width, colHeight * (i+1));
+    //     ctx.strokeStyle = "white";
+    //     ctx.stroke();
 
-        ctx.beginPath();
-        ctx.rect(0, 0, rowWidth * (i+1) , height);
-        ctx.strokeStyle = "white";
-        ctx.stroke();
+    //     ctx.beginPath();
+    //     ctx.rect(0, 0, rowWidth * (i+1) , height);
+    //     ctx.strokeStyle = "white";
+    //     ctx.stroke();
         
-    }
+    // }
 
     for (let i = 0; i < obstacles.length; i++) {
         const obstacle = obstacles[i];
