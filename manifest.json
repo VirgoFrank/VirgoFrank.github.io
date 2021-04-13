@@ -1,5 +1,5 @@
 {
-    "short_name":"WD1",
+    "short_name":"frogger",
     "name": "frogger",
     "start_url": "/index.html",
     "display": "standalone",
