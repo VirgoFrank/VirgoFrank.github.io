@@ -34,6 +34,8 @@ var direction = "";
 var amountMoved = 0;
 var container = document.querySelector(".container")
 var landscape = true;
+var clientX;
+var clientY;
 
 
 function setHeightAndWidth(){
@@ -86,29 +88,27 @@ function setInputListeners(){
     container.addEventListener("touchstart", (e) => {
         clientX = e.touches[0].clientX;
         clientY = e.touches[0].clientY;
-        console.log(clientX, clientY)
+    })
 
-        if(landscape){
-            if(clientX < (document.documentElement.clientWidth - width)/2)
-                MovePlayer("left")
-            else if(clientX > width - (document.documentElement.clientWidth - width)/2)
-                MovePlayer("right")
-            else if(clientY > height/2)
-                MovePlayer("down")
-            else if(clientY < height/2)
-                MovePlayer("up")
-            }
-        else{
-            if(clientY < (document.documentElement.clientHeight - height)/2)
-                MovePlayer("up")
-            else if(clientY > height + (document.documentElement.clientHeight - height)/2)
-                MovePlayer("down")
-            else if(clientX < width/2)
-                MovePlayer("left")
-            else if(clientX > width/2)
-                MovePlayer("right")
+    container.addEventListener("touchend", (e) => {
+
+        var touchendX = e.changedTouches[0].clientX
+        var touchendY = e.changedTouches[0].clientY
+
+        console.log("touchend",touchendX, touchendY)
+        console.log("Y",touchendY, clientY)
+        if((touchendX > clientX) && (touchendX - clientX > Math.abs(touchendY - clientY))){
+            MovePlayer("right")
         }
-        
+        else if((touchendX < clientX) &&  -1*(touchendX - clientX) > Math.abs(touchendY - clientY)){
+            MovePlayer("left")
+        }
+        else if(touchendY < clientY){
+            MovePlayer("up")
+        }
+        else if(touchendY > clientY){
+            MovePlayer("down")
+        }
     })
 
     document.addEventListener("keydown", () =>{
