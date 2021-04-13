@@ -18,7 +18,7 @@ let rowHeight = height/rows
 let rowWidth = width/rows
 let colWidth = width/cols
 let colHeight = height/cols
-var playerPosY = height-colHeight*9;
+var playerPosY = height-colHeight*14;
 var playerPosX = rowWidth*7;
 
 var PlayerPosXOrg;
@@ -205,33 +205,33 @@ class Obstacle{
 
 function initCars(){
 
-    // for (let i = 1; i < 5; i++) {
+    for (let i = 1; i < 5; i++) {
         
-    //     obstacles.push(new Obstacle(rowWidth*i*3, height-colHeight*6, rowWidth, colHeight, -200, "red", false, "images/car2.png"))
+        obstacles.push(new Obstacle(rowWidth*i*3, height-colHeight*6, rowWidth, colHeight, -200, "red", false, "images/car2.png"))
         
-    // }
-    // // obstacles.push(new Obstacle(-rowWidth*3, height-colHeight*6, rowWidth, colHeight, -200, "red", false, 'images/car2.png' ))
+    }
+    // obstacles.push(new Obstacle(-rowWidth*3, height-colHeight*6, rowWidth, colHeight, -200, "red", false, 'images/car2.png' ))
 
-    // for (let i = 1; i < 5; i++) {
+    for (let i = 1; i < 5; i++) {
 
-    //     obstacles.push(new Obstacle(rowWidth*3*i , height-colHeight*3, rowWidth, colHeight, 200, "blue", false, 'images/car1.png'))
+        obstacles.push(new Obstacle(rowWidth*3*i , height-colHeight*3, rowWidth, colHeight, 200, "blue", false, 'images/car1.png'))
         
-    // }
+    }
 
-    // for (let i = 1; i < 6; i++) {
+    for (let i = 1; i < 6; i++) {
 
-    //     obstacles.push(new Obstacle(rowWidth*4*i , height-colHeight*8, rowWidth, colHeight, 160, "pink", false, 'images/car3.png'))
+        obstacles.push(new Obstacle(rowWidth*4*i , height-colHeight*8, rowWidth, colHeight, 160, "pink", false, 'images/car3.png'))
         
-    // }
-    // obstacles.push(new Obstacle(-rowWidth*3 , height-colHeight*3, rowWidth, colHeight, 200, "blue", false, 'images/car3.png'))
+    }
+    obstacles.push(new Obstacle(-rowWidth*3 , height-colHeight*3, rowWidth, colHeight, 200, "blue", false, 'images/car3.png'))
 
-    // obstacles.push(new Obstacle(-rowWidth*4, height-colHeight*4, rowWidth*2, colHeight, 120, "red", false, 'images/car5.png'))
-    // obstacles.push(new Obstacle(rowWidth*8, height-colHeight*4, rowWidth*2, colHeight, 120, "red", false, 'images/car5.png'))
-    // obstacles.push(new Obstacle(rowWidth*8, height-colHeight*5, rowWidth, colHeight, 150, "green", false, 'images/car7.png'))
-    // obstacles.push(new Obstacle(rowWidth*4, height-colHeight*5, rowWidth, colHeight, 150, "green", false, 'images/car7.png'))
-    // obstacles.push(new Obstacle(rowWidth, height-colHeight*5, rowWidth, colHeight, 150, "green", false, 'images/car7.png'))
-    // obstacles.push(new Obstacle(rowWidth, height-colHeight*7, rowWidth*3, colHeight, -150, "yellow", false, 'images/car6.png'))
-    // obstacles.push(new Obstacle(rowWidth*6, height-colHeight*7, rowWidth*3, colHeight, -150, "yellow", false, 'images/car6.png'))
+    obstacles.push(new Obstacle(-rowWidth*4, height-colHeight*4, rowWidth*2, colHeight, 120, "red", false, 'images/car5.png'))
+    obstacles.push(new Obstacle(rowWidth*8, height-colHeight*4, rowWidth*2, colHeight, 120, "red", false, 'images/car5.png'))
+    obstacles.push(new Obstacle(rowWidth*8, height-colHeight*5, rowWidth, colHeight, 150, "green", false, 'images/car7.png'))
+    obstacles.push(new Obstacle(rowWidth*4, height-colHeight*5, rowWidth, colHeight, 150, "green", false, 'images/car7.png'))
+    obstacles.push(new Obstacle(rowWidth, height-colHeight*5, rowWidth, colHeight, 150, "green", false, 'images/car7.png'))
+    obstacles.push(new Obstacle(rowWidth, height-colHeight*7, rowWidth*3, colHeight, -150, "yellow", false, 'images/car6.png'))
+    obstacles.push(new Obstacle(rowWidth*6, height-colHeight*7, rowWidth*3, colHeight, -150, "yellow", false, 'images/car6.png'))
 
     for (let i = 1; i < 5; i++) {
 
@@ -278,7 +278,7 @@ function initCars(){
 function ResetPlayer(){
     if(godMode)
         return
-    playerPosY = height-colHeight*9;
+    playerPosY = height-colHeight*2;
     playerPosX = rowWidth*7;
     playerMoving = false
 }
