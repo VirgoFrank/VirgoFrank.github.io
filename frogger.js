@@ -43,16 +43,27 @@ function setHeightAndWidth(){
     var container = document.querySelector(".container")
 
     if(document.documentElement.clientHeight > document.documentElement.clientWidth){
+        console.log("portrait")
         height = document.documentElement.clientWidth;
         width =  document.documentElement.clientWidth;
         container.style.paddingTop = (document.documentElement.clientHeight - height)/2 + "px"
+        container.style.paddingLeft = 0
+        if(landscape){
+            Menu("Frogger clone", "Press any key to start")
+        }
         landscape = false
     }
     else{
+        console.log("landscape")
+        if(!landscape){
+            Menu("Frogger clone", "Press any key to start")
+        }
         landscape = true
         height = document.documentElement.clientHeight;
         width = document.documentElement.clientHeight;
         container.style.paddingLeft = (document.documentElement.clientWidth - width)/2 + "px"
+        container.style.paddingTop = 0
+
     }
 }
 
