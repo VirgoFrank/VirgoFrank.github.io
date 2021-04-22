@@ -65,6 +65,10 @@ function setHeightAndWidth(){
         container.style.paddingTop = 0
 
     }
+    rowHeight = height/rows
+    rowWidth = width/rows
+    colWidth = width/cols
+    colHeight = height/cols
 }
 
 function MovePlayer(dir){
