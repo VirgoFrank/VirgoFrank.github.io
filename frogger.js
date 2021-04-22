@@ -559,6 +559,7 @@ function Menu(title, Bottom_text){
     document.addEventListener("keydown", () =>{
         startGame()
     })
+    container = document.querySelector(".container")
     container.addEventListener("touchstart", (e) => {
         startGame()
     })
