@@ -2,7 +2,6 @@ var ctx = document.querySelector("canvas").getContext("2d");
 var canvas = document.createElement('canvas')
 var height = 0
 var width =0
-setHeightAndWidth()
 let PlayerImg = new Image();
 PlayerImg.src = 'images/frogger.png';
 var KeyPressed = false
@@ -14,10 +13,11 @@ let movingSpeed = 50;
 let obstacles = [];
 let rows = 16
 let cols = 16
-let rowHeight = height/rows
-let rowWidth = width/rows
-let colWidth = width/cols
-let colHeight = height/cols
+let rowHeight 
+let rowWidth 
+let colWidth 
+let colHeight 
+setHeightAndWidth()
 var playerPosY = height-colHeight*14;
 var playerPosX = rowWidth*7;
 
@@ -46,6 +46,10 @@ function setHeightAndWidth(){
         console.log("portrait")
         height = document.documentElement.clientWidth;
         width =  document.documentElement.clientWidth;
+        rowHeight = height/rows
+        rowWidth = width/rows
+        colWidth = width/cols
+        colHeight = height/cols
         container.style.paddingTop = (document.documentElement.clientHeight - height)/2 + "px"
         container.style.paddingLeft = 0
         if(landscape){
@@ -61,14 +65,15 @@ function setHeightAndWidth(){
         landscape = true
         height = document.documentElement.clientHeight;
         width = document.documentElement.clientHeight;
+        rowHeight = height/rows
+        rowWidth = width/rows
+        colWidth = width/cols
+        colHeight = height/cols
         container.style.paddingLeft = (document.documentElement.clientWidth - width)/2 + "px"
         container.style.paddingTop = 0
 
     }
-    rowHeight = height/rows
-    rowWidth = width/rows
-    colWidth = width/cols
-    colHeight = height/cols
+    
 }
 
 function MovePlayer(dir){
