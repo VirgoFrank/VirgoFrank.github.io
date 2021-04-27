@@ -18,7 +18,7 @@ let rowWidth
 let colWidth 
 let colHeight 
 setHeightAndWidth()
-var playerPosY = height-colHeight*14;
+var playerPosY = height-colHeight*2;
 var playerPosX = rowWidth*7;
 
 var PlayerPosXOrg;
@@ -36,31 +36,33 @@ var container = document.querySelector(".container")
 var landscape = true;
 var clientX;
 var clientY;
+var nrOfFramesOfGrace = 0
+var gracePeriod
 
 
 function setHeightAndWidth(){
+
+    // window.scrollTo(0,document.body.scrollHeight);
     
     var container = document.querySelector(".container")
 
     if(document.documentElement.clientHeight > document.documentElement.clientWidth){
-        console.log("portrait")
-        height = document.documentElement.clientWidth;
-        width =  document.documentElement.clientWidth;
+        height = window.screen.width-80;
+        width = window.screen.width-80;
         rowHeight = height/rows
         rowWidth = width/rows
         colWidth = width/cols
         colHeight = height/cols
         container.style.paddingTop = (document.documentElement.clientHeight - height)/2 + "px"
-        container.style.paddingLeft = 0
-        if(landscape){
-            Menu("Frogger clone", "Press any key to start")
-        }
+        container.style.paddingLeft = 40 + "px"
+        // if(landscape){
+        //     Menu("Frogger clone", "Press any key to start")
+        // }
         landscape = false
     }
     else{
-        console.log("landscape")
         if(!landscape){
-            Menu("Frogger clone", "Press any key to start")
+            gracePeriod = true
         }
         landscape = true
         height = document.documentElement.clientHeight;
@@ -73,6 +75,11 @@ function setHeightAndWidth(){
         container.style.paddingTop = 0
 
     }
+
+    
+
+    // height = document.documentElement.clientHeight;
+    // width = document.documentElement.clientHeight;
     
 }
 
@@ -106,11 +113,13 @@ function MovePlayer(dir){
 function setInputListeners(){
 
     container.addEventListener("touchstart", (e) => {
+        e.preventDefault();
         clientX = e.touches[0].clientX;
         clientY = e.touches[0].clientY;
     })
 
     container.addEventListener("touchend", (e) => {
+        e.preventDefault();
 
         if(playerMoving){
             return
@@ -149,7 +158,7 @@ function setInputListeners(){
 
     document.addEventListener("keydown", () =>{
 
-        console.log("playerPosY", playerPosY)
+        console.log("playerPosX", playerPosX)
         console.log("playerPosY", playerPosY)
         console.log(playerPosX)
         console.log(playerMoving)
@@ -296,8 +305,13 @@ function initCars(){
 }
 
 function ResetPlayer(){
-    if(godMode)
+
+    nrOfFramesOfGrace++
+
+    if(godMode){
         return
+    }
+    console.log("reset")
     playerPosY = height-colHeight*2;
     playerPosX = rowWidth*7;
     playerMoving = false
@@ -350,9 +364,14 @@ function Update(deltaTime){
     }
 
     if((playerPosY < colHeight*7-10 && playerPosY > colHeight*2-10) && !OnRaft){
-        console.log("onraft ", playerPosY, colHeight)
+        console.log("in water ", playerPosY, playerPosX)
+        nrOfFramesOfGrace++
+        if(nrOfFramesOfGrace < 10)
+            return
         ResetPlayer()
     }
+    else
+        nrOfFramesOfGrace = 0
     if(playerMoving){
         UpdatePlayer(deltaTime)
     }
@@ -481,6 +500,8 @@ function DrawMap(){
 }
 
 function loop(timeStamp){
+
+
     if(pause){
         console.log("pause time stamp", timeStamp)
         timeStampBeforePause = timeStamp
